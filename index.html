@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Phương 💗</title>
+
+<style>
+:root{
+  --bgCream:#fbf5ee;
+  --bgBlush:#fff1f4;
+  --bgRose:#fde3e8;
+
+  --card:#ffffffee;
+  --ink:#2a2240;
+  --muted:#7a6f86;
+
+  --red:#e84c5c;
+  --pink:#ff6fa5;
+
+  --shadow:0 22px 60px rgba(22,10,45,0.14);
+  --shadow2:0 18px 45px rgba(22,10,45,0.10);
+  --radius:30px;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(900px 520px at 20% 15%, #ffffff 0%, transparent 60%),
+    radial-gradient(900px 520px at 80% 30%, var(--bgBlush) 0%, transparent 55%),
+    linear-gradient(135deg, var(--bgCream), var(--bgRose));
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--ink);
+  overflow:hidden;
+}
+
+.stage{
+  width:min(980px, 92vw);
+  min-height:560px;
+  background: rgba(255,255,255,0.72);
+  border:1px solid rgba(232,76,92,0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position:relative;
+  padding: 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* floating hearts */
+.heartFloat{
+  position:absolute;
+  font-size:18px;
+  opacity:0.12;
+  animation: floatUp 14s linear infinite;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{ transform: translateY(80px); }
+  to{ transform: translateY(-700px); }
+}
+
+/* envelope */
+.envelopeWrap{
+  width:min(640px,92vw);
+  height:390px;
+  position:relative;
+  cursor:pointer;
+  user-select:none;
+}
+
+.envelope{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:540px;
+  height:270px;
+  border-radius:24px;
+  background:linear-gradient(135deg,#fff,#fff7f1);
+  box-shadow:var(--shadow2);
+  overflow:hidden;
+}
+
+.pocket{
+  position:absolute;
+  bottom:0;
+  height:62%;
+  width:100%;
+  background:linear-gradient(135deg,rgba(255,111,165,0.18),rgba(232,76,92,0.10));
+}
+
+.flap{
+  position:absolute;
+  top:0;
+  width:100%;
+  height:58%;
+  background:linear-gradient(135deg,rgba(232,76,92,0.18),rgba(255,111,165,0.14));
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:transform .8s cubic-bezier(.2,.9,.2,1);
+}
+
+.frontText{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900;
+  gap:6px;
+}
+.frontText span{
+  background:linear-gradient(135deg,var(--red),var(--pink));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.seal{
+  position:absolute;
+  left:50%;
+  top:67%;
+  transform:translate(-50%,-50%);
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--red),var(--pink));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:26px;
+}
+
+.tapHint{
+  margin-top:16px;
+  text-align:center;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* letter (bigger) */
+.letter{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) translateY(30px);
+  width:640px;
+  max-width: 94vw;
+  height:380px;
+  background:var(--card);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  opacity:0;
+  pointer-events:none;
+  transition:.8s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 24px 22px;
+  overflow:hidden;
+}
+
+.opened .flap{ transform:rotateX(180deg); }
+.opened .frontText,
+.opened .seal{ opacity:0; }
+.opened .letter{
+  opacity:1;
+  transform:translate(-50%,-50%) translateY(-60px);
+  pointer-events:auto;
+}
+
+/* question */
+h1{
+  font-size:34px;
+  margin:0 0 14px 0;
+  line-height:1.18;
+}
+.highlight{
+  background:linear-gradient(135deg,var(--red),var(--pink));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* button area */
+.buttons{
+  position:relative;
+  height:140px;
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  align-items:center;
+  margin-top: 10px;
+}
+
+button{
+  padding:14px 26px;
+  font-size:18px;
+  font-weight:900;
+  border-radius:18px;
+  border:none;
+  cursor:pointer;
+  transition: transform .16s ease;
+}
+
+#yesBtn{
+  background:linear-gradient(135deg,var(--red),var(--pink));
+  color:white;
+}
+
+/* IMPORTANT: No starts normal, beside Yes */
+#noBtn{
+  background:white;
+  border:2px solid #f0d6dd;
+  position:relative;
+  left:0;
+  top:0;
+}
+</style>
+</head>
+
+<body>
+<div class="stage">
+  <div class="heartFloat" style="left:20%; top:115%; animation-delay:0s">💗</div>
+  <div class="heartFloat" style="left:50%; top:120%; animation-delay:2s">💖</div>
+  <div class="heartFloat" style="left:80%; top:112%; animation-delay:4s">💞</div>
+
+  <div class="envelopeWrap" id="envelopeWrap">
+    <div class="envelope">
+      <div class="flap"></div>
+      <div class="pocket"></div>
+      <div class="frontText">For <span>Baby Phương</span> 💗</div>
+      <div class="seal">💌</div>
+    </div>
+
+    <div class="letter">
+      <div style="width:100%;">
+        <h1>
+          My Lovely Baby Phương 💗<br>
+          Will you be my <span class="highlight">forever Valentine</span>?
+        </h1>
+
+        <div class="buttons" id="btnArea">
+          <button id="yesBtn">Yes 💞</button>
+          <button id="noBtn">No 😭</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tapHint">Tap the envelope to open it ✨</div>
+  </div>
+</div>
+
+<script>
+const envelope = document.getElementById("envelopeWrap");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const btnArea = document.getElementById("btnArea");
+
+let opened = false;
+let yesScale = 1;
+
+/* Your speed target: 6.5–7 */
+const COOLDOWN = 180;
+const NEAR_RADIUS = 105;
+const YES_GROW = 0.075;
+
+let lastMove = 0;
+let noIsFloating = false; // starts side-by-side, NOT floating
+
+envelope.addEventListener("click", () => {
+  if(opened) return;
+  opened = true;
+  envelope.classList.add("opened");
+  // IMPORTANT: we do NOT move No on open anymore.
+  // She sees two clear choices first.
+});
+
+function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+
+function makeNoFloatIfNeeded(){
+  if(noIsFloating) return;
+
+  // switch to absolute within btnArea WITHOUT changing current visual position too much
+  const areaRect = btnArea.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  // current position relative to btnArea
+  const left = btnRect.left - areaRect.left;
+  const top = btnRect.top - areaRect.top;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = left + "px";
+  noBtn.style.top = top + "px";
+
+  noIsFloating = true;
+}
+
+function teleportNo(){
+  const area = btnArea.getBoundingClientRect();
+  const btn = noBtn.getBoundingClientRect();
+  const pad = 10;
+
+  const maxX = area.width - btn.width - pad * 2;
+  const maxY = area.height - btn.height - pad * 2;
+
+  let x = pad + Math.random() * Math.max(10, maxX);
+  let y = pad + Math.random() * Math.max(10, maxY);
+
+  x = clamp(x, pad, area.width - btn.width - pad);
+  y = clamp(y, pad, area.height - btn.height - pad);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+function runNo(){
+  if(!opened) return;
+
+  const now = Date.now();
+  if(now - lastMove < COOLDOWN) return;
+  lastMove = now;
+
+  // only grows when No actually escapes
+  yesScale += YES_GROW;
+  yesBtn.style.transform = `scale(${yesScale})`;
+
+  // Only start floating when it needs to run
+  makeNoFloatIfNeeded();
+  teleportNo();
+}
+
+/* Behavior: No only moves when cursor gets close */
+noBtn.addEventListener("mouseenter", runNo);
+noBtn.addEventListener("click", (e) => { e.preventDefault(); runNo(); });
+
+btnArea.addEventListener("mousemove", (e) => {
+  if(!opened) return;
+
+  const n = noBtn.getBoundingClientRect();
+  const dx = Math.max(n.left - e.clientX, 0, e.clientX - n.right);
+  const dy = Math.max(n.top - e.clientY, 0, e.clientY - n.bottom);
+  const dist = Math.hypot(dx, dy);
+
+  if(dist < NEAR_RADIUS){
+    runNo();
+  }
+});
+
+/* YES click placeholder (Menu 2 next) */
+yesBtn.addEventListener("click", () => {
+  window.location.href = "menu.html";
+});
+</script>
+</body>
+</html>
